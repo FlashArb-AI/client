@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
-
+import { Send } from "lucide-react";
 const ChatComponent = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>(
     []
   );
-  const agentId = "FlashArb-AI"; // Change this as needed
+  const agentId = "FlashArb-AI";
 
   const sendMessage = async () => {
     if (!input.trim()) return; // Prevent sending empty messages
@@ -33,7 +34,7 @@ const ChatComponent = () => {
       data.forEach((message: { text: string }) =>
         setMessages((prev) => [
           ...prev,
-          { sender: "Agent", text: message.text },
+          { sender: "FlashArb-AI", text: message.text },
         ])
       );
     } catch (error) {
@@ -44,33 +45,76 @@ const ChatComponent = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-4 border rounded shadow">
-      <div className="h-64 overflow-y-auto border-b p-2">
-        {messages.map((msg, index) => (
-          <p
-            key={index}
-            className={
-              msg.sender === "You" ? "text-blue-500" : "text-green-500"
-            }
-          >
-            <strong>{msg.sender}:</strong> {msg.text}
-          </p>
-        ))}
-      </div>
-      <div className="mt-2 flex">
+    <div className="flex flex-col justify-center items-center h-screen w-full gap-4 overflow-y-auto ">
+      {isChatOpen && (
+        <div className="flex flex-col h-full w-5/6 overflow-y-auto space-y-4 mt-20">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex gap-3 ${
+                msg.sender === "You" ? "justify-end" : "justify-start"
+              }`}
+            >
+              {" "}
+              <strong
+                className={`${
+                  msg.sender === "You" ? "hidden" : ""
+                } block text-sm opacity-75`}
+              >
+                {msg.sender}
+              </strong>
+              <div
+                className={`max-w-[75%] px-3 py-1.5 rounded-lg text-white  ${
+                  msg.sender === "You"
+                    ? "bg-[var(--foreground)] text-right"
+                    : "bg-gray-700 text-left"
+                }`}
+              >
+                {msg.text}
+              </div>{" "}
+              <strong
+                className={`${
+                  msg.sender === agentId ? "hidden" : ""
+                } block text-sm opacity-75 mr-4 `}
+              >
+                {msg.sender}
+              </strong>
+            </div>
+          ))}
+        </div>
+      )}
+      {!isChatOpen && (
+        <div className="w-full flex flex-col justify-center items-center gap-3">
+          {" "}
+          <h1>How can i help you today?</h1>
+        </div>
+      )}{" "}
+      <div
+        className={`
+           ${isChatOpen ? " mb-8" : ""}
+        }  w-1/2 px-7 py-4 rounded-3xl flex flex-row h-24 bg-gray-800 items-center justify-center`}
+      >
         <input
           type="text"
-          className="flex-1 p-2 border rounded"
-          placeholder="Type your message..."
+          className="w-full bg-transparent outline-none focus:ring-0"
+          placeholder="Ask me anything regarding arbitrage or defi..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage();
+              setIsChatOpen(true);
+            }
+          }}
         />
         <button
-          className="ml-2 p-2 bg-blue-500 text-white rounded"
-          onClick={sendMessage}
+          className="bg-gradient-to-r from-[var(--foreground)] to-red-900 px-5 py-3 rounded-lg text-red-200 font-semibold flex flex-row gap-2 text-lg justify-center items-center transition-transform duration-300 hover:scale-105"
+          onClick={() => {
+            sendMessage();
+            setIsChatOpen(true); // ✅ Correct way to update state
+          }}
         >
-          Send
+          Send <Send />
         </button>
       </div>
     </div>
