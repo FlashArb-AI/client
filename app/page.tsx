@@ -90,33 +90,64 @@ const ChatComponent = () => {
         </div>
       )}{" "}
       <div
-        className={`
-           ${isChatOpen ? " mb-8" : ""}
-        }  w-1/2 px-7 py-4 rounded-3xl flex flex-row h-24 bg-gray-800 items-center justify-center`}
+        className={` ${
+          isChatOpen ? " mb-8" : ""
+        } w-1/2 focus-within:bg-gradient-to-r focus-within:from-red-500 focus-within:to-blue-800  p-0.5 rounded-3xl`}
       >
-        <input
-          type="text"
-          className="w-full bg-transparent outline-none focus:ring-0"
-          placeholder="Ask me anything regarding arbitrage or defi..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage();
-              setIsChatOpen(true);
-            }
-          }}
-        />
-        <button
-          className="bg-gradient-to-r from-[var(--foreground)] to-red-900 px-5 py-3 rounded-lg text-red-200 font-semibold flex flex-row gap-2 text-lg justify-center items-center transition-transform duration-300 hover:scale-105"
-          onClick={() => {
-            sendMessage();
-            setIsChatOpen(true); // ✅ Correct way to update state
-          }}
+        <div
+          className={`
+          
+        }  w-full px-7  rounded-3xl flex flex-row h-24 bg-gray-800 items-center justify-center`}
         >
-          Send <Send />
-        </button>
-      </div>
+          <input
+            type="text"
+            className="w-full bg-transparent outline-none focus:ring-0"
+            placeholder="Ask me anything regarding arbitrage or defi..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+                setIsChatOpen(true);
+              }
+            }}
+          />
+          <button
+            className="bg-gradient-to-r from-[var(--foreground)] to-red-900 px-4 py-2 rounded-lg text-red-200 font-semibold flex flex-row gap-2 text-lg justify-center items-center transition-transform duration-300 hover:scale-105"
+            onClick={() => {
+              sendMessage();
+              setIsChatOpen(true); // ✅ Correct way to update state
+            }}
+          >
+            Send <Send />
+          </button>
+        </div>
+      </div>{" "}
+      {!isChatOpen && (
+        <div className="space-y-2 flex flex-col mt-3 justify-center items-center">
+          <div className="flex flex-row gap-2">
+            <div className="border border-[var(--foreground)] bg-red-950 rounded-lg px-3 py-1 text-red-300 text-sm font-bold">
+              explore arbitrage opportunities
+            </div>
+            <div className="border border-[var(--foreground)] bg-red-950 rounded-lg px-3 py-1 text-red-300 text-sm font-bold">
+              execute arbitrage trade
+            </div>
+            <div className="border border-[var(--foreground)] bg-red-950 rounded-lg px-3 py-1 text-red-300 text-sm font-bold">
+              sonic mainnet arbitrage
+            </div>
+          </div>
+          <div
+            className="border w-fit  border-[var(--foreground)] bg-red-950 rounded-lg px-3 py-1 text-red-300 text-sm font-bold"
+            onClick={() => {
+              setInput("shadow and wagmi dex arbitrage");
+              setIsChatOpen(true);
+              sendMessage();
+            }}
+          >
+            shadow and wagmi dex arbitrage
+          </div>
+        </div>
+      )}
     </div>
   );
 };
