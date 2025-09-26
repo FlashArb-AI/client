@@ -51,31 +51,27 @@ const ChatComponent = () => {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex gap-3 ${
-                msg.sender === "You" ? "justify-end" : "justify-start"
-              }`}
+              className={`flex gap-3 ${msg.sender === "You" ? "justify-end" : "justify-start"
+                }`}
             >
               {" "}
               <strong
-                className={`${
-                  msg.sender === "You" ? "hidden" : ""
-                } block text-sm opacity-75`}
+                className={`${msg.sender === "You" ? "hidden" : ""
+                  } block text-sm opacity-75`}
               >
                 {msg.sender}
               </strong>
               <div
-                className={`max-w-[75%] px-3 py-1.5 rounded-lg text-white  ${
-                  msg.sender === "You"
-                    ? "bg-[var(--foreground)] text-right"
-                    : "bg-gray-700 text-left"
-                }`}
+                className={`max-w-[75%] px-3 py-1.5 rounded-lg text-white  ${msg.sender === "You"
+                  ? "bg-[var(--foreground)] text-right"
+                  : "bg-gray-700 text-left"
+                  }`}
               >
                 {msg.text}
               </div>{" "}
               <strong
-                className={`${
-                  msg.sender === agentId ? "hidden" : ""
-                } block text-sm opacity-75 mr-4 `}
+                className={`${msg.sender === agentId ? "hidden" : ""
+                  } block text-sm opacity-75 mr-4 `}
               >
                 {msg.sender}
               </strong>
@@ -90,9 +86,8 @@ const ChatComponent = () => {
         </div>
       )}{" "}
       <div
-        className={` ${
-          isChatOpen ? " mb-8" : ""
-        } w-1/2 focus-within:bg-gradient-to-r focus-within:from-red-500 focus-within:to-blue-800  p-0.5 rounded-3xl`}
+        className={` ${isChatOpen ? " mb-8" : ""
+          } w-1/2 focus-within:bg-gradient-to-r focus-within:from-red-500 focus-within:to-blue-800  p-0.5 rounded-3xl`}
       >
         <div
           className={`
@@ -133,7 +128,7 @@ const ChatComponent = () => {
               execute arbitrage trade
             </div>
             <div className="border border-[var(--foreground)] bg-red-950 rounded-lg px-3 py-1 text-red-300 text-sm font-bold">
-              sonic mainnet arbitrage
+              celo mainnet arbitrage
             </div>
           </div>
           <div
