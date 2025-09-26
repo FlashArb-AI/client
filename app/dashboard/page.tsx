@@ -5,19 +5,19 @@ function Dashboard() {
   const trades = [
     {
       platform: "Wagmi/Uniswap",
-      pair: "WS/WETH",
+      pair: "CELO/WETH",
       profit: "0.001 WS",
       timestamp: "2025-03-08 14:35:22",
     },
     {
       platform: "Wagmi/Uniswap",
-      pair: "WS/WETH",
+      pair: "CELO/WETH",
       profit: "0.002 WS",
       timestamp: "2025-03-07 09:15:47",
     },
     {
       platform: "Wagmi/Uniswap",
-      pair: "WS/WETH",
+      pair: "CELO/WETH",
       profit: "0.0015 WS",
       timestamp: "2025-03-06 18:22:10",
     },
